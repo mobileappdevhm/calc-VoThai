@@ -6,63 +6,78 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+
       title: "Calculator App",
-      theme: new ThemeData(primarySwatch: Colors.red),
-      home: new HomePage(),
+      theme: new ThemeData.dark(),
+      home: new Calculator(),
     );
   }
 }
 
 
-class HomePage extends StatefulWidget {
+class Calculator extends StatefulWidget {
   @override
-  State createState() => new HomePageState();
+  State createState() => new CalculatorState();
 }
 
-class HomePageState extends State<HomePage> {
-  var num1 = 0, num2 = 0, sum = 0;
+class CalculatorState extends State<Calculator> {
+  var num1 = 0.0, num2 = 0.0, sum = 0.0, ans = 0.0;
 
-  final TextEditingController t1 = new TextEditingController(text: "0");
-  final TextEditingController t2 = new TextEditingController(text: "0");
+  final TextEditingController t1 = new TextEditingController();
+  final TextEditingController t2 = new TextEditingController();
 
-  void doAddition() {
+  void doAdd() {
     setState(() {
-      num1 = int.parse(t1.text);
-      num2 = int.parse(t2.text);
+      num1 = double.parse(t1.text);
+      num2 = double.parse(t2.text);
       sum = num1 + num2;
     });
   }
 
   void doSub() {
     setState(() {
-      num1 = int.parse(t1.text);
-      num2 = int.parse(t2.text);
+      num1 = double.parse(t1.text);
+      num2 = double.parse(t2.text);
       sum = num1 - num2;
     });
   }
 
   void doMul() {
     setState(() {
-      num1 = int.parse(t1.text);
-      num2 = int.parse(t2.text);
+      num1 = double.parse(t1.text);
+      num2 = double.parse(t2.text);
       sum = num1 * num2;
     });
   }
 
   void doDiv() {
     setState(() {
-      num1 = int.parse(t1.text);
-      num2 = int.parse(t2.text);
-      sum = num1 ~/ num2;
+      num1 = double.parse(t1.text);
+      num2 = double.parse(t2.text);
+      sum = num1 / num2;
     });
   }
 
   void doClear() {
     setState(() {
-      t1.text = "0";
-      t2.text = "0";
+      num1 = 0.0;
+      num2 = 0.0;
+      sum = 0.0;
+      t1.clear();
+      t2.clear();
     });
   }
+
+  void doAns() {
+    setState(() {
+        ans = sum;
+        if(ans != 0.0) {
+         t1.text = "$ans";
+        }
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +95,7 @@ class HomePageState extends State<HomePage> {
               style: new TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.purple),
+                  color: Colors.white),
             ),
             new TextField(
               keyboardType: TextInputType.number,
@@ -96,16 +111,16 @@ class HomePageState extends State<HomePage> {
               padding: const EdgeInsets.only(top: 20.0),
             ),
             new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 new MaterialButton(
                   child: new Text("+"),
-                  color: Colors.greenAccent,
-                  onPressed: doAddition,
+                  color: Colors.red,
+                  onPressed: doAdd,
                 ),
                 new MaterialButton(
                   child: new Text("-"),
-                  color: Colors.greenAccent,
+                  color: Colors.red,
                   onPressed: doSub,
                 ),
               ],
@@ -114,30 +129,35 @@ class HomePageState extends State<HomePage> {
               padding: const EdgeInsets.only(top: 10.0),
             ),
             new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 new MaterialButton(
                   child: new Text("*"),
-                  color: Colors.greenAccent,
+                  color: Colors.red,
                   onPressed: doMul,
                 ),
                 new MaterialButton(
                   child: new Text("/"),
-                  color: Colors.greenAccent,
+                  color: Colors.red,
                   onPressed: doDiv,
                 ),
               ],
             ),
             new Padding(
-              padding: const EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.only(top: 10.0),
             ),
             new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 new MaterialButton(
                   child: new Text("Clear"),
-                  color: Colors.greenAccent,
+                  color: Colors.red,
                   onPressed: doClear,
+                ),
+                new MaterialButton(
+                  child: new Text("Ans"),
+                  color: Colors.red,
+                  onPressed: doAns,
                 ),
               ],
             )
