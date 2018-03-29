@@ -1,6 +1,6 @@
-# calc_app
+# Calculator App by Vo Xuan Ngoc Thai 
 
-My first Calculator application.
+For this App i used the following Tutorial [https://www.youtube.com/watch?v=Ss1HkZ3LnRY&t=670s]
 
 ## Getting Started
 
